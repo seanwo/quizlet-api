@@ -21,7 +21,7 @@ function GET(url, access_token, compare) {
             };
 
             client.get(url, args, done);
-            client.once('error', error);
+            client.on('error', error);
         }
     )
 }
@@ -43,7 +43,7 @@ function PUT(url, access_token) {
             };
 
             client.put(url, args, done);
-            client.once('error', error);
+            client.on('error', error);
         }
     )
 }
@@ -65,7 +65,7 @@ function DELETE(url, access_token) {
             };
 
             client.delete(url, args, done);
-            client.once('error', error);
+            client.on('error', error);
         }
     )
 }
