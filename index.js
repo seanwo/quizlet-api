@@ -6,6 +6,7 @@ function GET(url, access_token, compare) {
         function (resolve, reject) {
 
             function done(data, response) {
+                client.removeListener('error', error);
                 if (compare !== undefined) {
                     data.sort(compare);
                 }
@@ -13,6 +14,7 @@ function GET(url, access_token, compare) {
             }
 
             function error(err) {
+                client.removeListener('error', error);
                 reject(err);
             }
 
@@ -31,10 +33,12 @@ function PUT(url, access_token) {
         function (resolve, reject) {
 
             function done(data, response) {
+                client.removeListener('error', error);
                 resolve(data);
             }
 
             function error(err) {
+                client.removeListener('error', error);
                 reject(err);
             }
 
@@ -53,10 +57,12 @@ function DELETE(url, access_token) {
         function (resolve, reject) {
 
             function done(data, response) {
+                client.removeListener('error', error);
                 resolve(data);
             }
 
             function error(err) {
+                client.removeListener('error', error);
                 reject(err);
             }
 
