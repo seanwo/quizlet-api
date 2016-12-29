@@ -7,11 +7,13 @@ function GET(url, access_token, compare, augment) {
 
             function done(data, response) {
                 client.removeListener('error', error);
-                if ((compare !== undefined) && (compare)) {
-                    data.sort(compare);
-                }
-                if ((augment !== undefined) && (augment)) {
-                    data = augment(data);
+                if (data.http_code == undefined) {
+                    if ((compare !== undefined) && (compare)) {
+                        data.sort(compare);
+                    }
+                    if ((augment !== undefined) && (augment)) {
+                        data = augment(data);
+                    }
                 }
                 resolve(data);
             }
