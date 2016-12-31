@@ -1,6 +1,6 @@
 # Quizlet API
 
-A simple REST module that returns [ECMAScript 6 promises](http://www.ecma-international.org/ecma-262/6.0/#sec-promise-constructor) for [Quizlet API calls](https://quizlet.com/api/2.0/docs/api-intro).
+A simple REST module that returns [ECMAScript 6](http://www.ecma-international.org/ecma-262/6.0/#sec-promise-constructor) promises for [Quizlet API](https://quizlet.com/api/2.0/docs/api-intro) calls.
 
 [![alt text](https://quizlet.com/static/ThisUsesQuizlet-Blue.png "Powered by Quizlet")](https://quizlet.com/)
 
