@@ -44,7 +44,6 @@ function GET(url, access_token, compare, augment) {
             request = client.get(url, args, done);
             request.on('requestTimeout', requestTimeout);
             request.on('responseTimeout', responseTimeout);
-            console.log(request.options);
             client.on('error', error);
         }
     )
