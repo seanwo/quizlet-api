@@ -1,9 +1,13 @@
 var Client = require('node-rest-client').Client;
-var client = new Client();
+
+const requestTimeoutLimit = 5000;
+const responseTimeoutLimit = 3000;
 
 function GET(url, access_token, compare, augment) {
     return new Promise(
         function (resolve, reject) {
+
+            var client = new Client();
 
             function done(data, response) {
                 client.removeListener('error', error);
@@ -23,11 +27,24 @@ function GET(url, access_token, compare, augment) {
                 reject(err);
             }
 
+            function requestTimeout(req) {
+                reject(new Error("Request timed out"));
+            }
+
+            function responseTimeout(req) {
+                reject(new Error("Response timed out"));
+            }
+
             var args = {
-                headers: { 'Authorization': 'Bearer ' + access_token }
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                requestConfig: { timeout: requestTimeoutLimit },
+                responseConfig: { timeout: responseTimeoutLimit }
             };
 
-            client.get(url, args, done);
+            request = client.get(url, args, done);
+            request.on('requestTimeout', requestTimeout);
+            request.on('responseTimeout', responseTimeout);
+            console.log(request.options);
             client.on('error', error);
         }
     )
@@ -37,6 +54,8 @@ function PUT(url, access_token) {
     return new Promise(
         function (resolve, reject) {
 
+            var client = new Client();
+
             function done(data, response) {
                 client.removeListener('error', error);
                 resolve(data);
@@ -47,11 +66,23 @@ function PUT(url, access_token) {
                 reject(err);
             }
 
+            function requestTimeout(req) {
+                reject(new Error("Request timed out"));
+            }
+
+            function responseTimeout(req) {
+                reject(new Error("Response timed out"));
+            }
+
             var args = {
-                headers: { 'Authorization': 'Bearer ' + access_token }
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                requestConfig: { timeout: requestTimeoutLimit },
+                responseConfig: { timeout: responseTimeoutLimit }
             };
 
-            client.put(url, args, done);
+            request = client.put(url, args, done);
+            request.on('requestTimeout', requestTimeout);
+            request.on('responseTimeout', responseTimeout);
             client.on('error', error);
         }
     )
@@ -61,6 +92,8 @@ function DELETE(url, access_token) {
     return new Promise(
         function (resolve, reject) {
 
+            var client = new Client();
+
             function done(data, response) {
                 client.removeListener('error', error);
                 resolve(data);
@@ -71,11 +104,23 @@ function DELETE(url, access_token) {
                 reject(err);
             }
 
+            function requestTimeout(req) {
+                reject(new Error("Request timed out"));
+            }
+
+            function responseTimeout(req) {
+                reject(new Error("Response timed out"));
+            }
+
             var args = {
-                headers: { 'Authorization': 'Bearer ' + access_token }
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                requestConfig: { timeout: requestTimeoutLimit },
+                responseConfig: { timeout: responseTimeoutLimit }
             };
 
-            client.delete(url, args, done);
+            request = client.delete(url, args, done);
+            request.on('requestTimeout', requestTimeout);
+            request.on('responseTimeout', responseTimeout);
             client.on('error', error);
         }
     )
